@@ -1,0 +1,16 @@
+.MemoryPage-link-margin {
+    margin-bottom: 10px;
+  }
+  
+  .MemoryPage {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .MemoryPage-controls {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    margin-left: 20px;
+  }
+  
