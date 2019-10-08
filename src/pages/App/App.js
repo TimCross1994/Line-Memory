@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import SettingsPage from '../SettingsPage/SettingsPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
@@ -35,16 +34,12 @@ class App extends Component {
 render() {
     return(
     <div className ="App">
-      <header className='header-footer'>L I N E  ||  M E M O R Y</header>
-      {/* <Navbar /> */}
-      <MemoryPage/>
     <Switch>
-      <Route exact path='/settings' render={props => 
-        <SettingsPage
-          {...props} 
-          difficulty={this.state.difficulty}
-          handleDifficultyChange={this.handleDifficultyChange}
-        />
+      <Route exact path='/' render={()=>       
+      <MemoryPage
+      user = {this.state.user}
+      handleLogout = {this.handleLogout}
+      />
       }/>
       <Route exact path='/signup' render={({ history }) => 
         <SignupPage

@@ -28,11 +28,11 @@ button:focus, .btn:focus {
 }
 
 .header-footer {
-  height: 50px;
+  height: 100px;
   padding: 10px;
   margin: 15px 0;
   color: grey;
-  font-size: 18px;
+  font-size: 30px;
   text-align: center;
 }
 
