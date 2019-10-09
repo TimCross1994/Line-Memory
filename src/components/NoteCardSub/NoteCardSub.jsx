@@ -1,9 +1,9 @@
 import React from 'react';
-import './NoteCard.css';
-
+import './NoteCardSub.css';
+import NoteCardFront from '../NoteCardFront/NoteCardFront';
 class CreateNote extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             line: '',
             monologue: '',
@@ -20,12 +20,14 @@ class CreateNote extends React.Component {
         :'';
         return(
             <div className='create-card'>
+                <NoteCardFront line={this.state.currentCard.line}
+
+                />
                 <div className='note-card__shadow'
                 onClick={() => {
                     this.props.onShadowClick();
                 }}
                 >
-        
             
             </div>
             <div className='note-body'>
@@ -34,16 +36,17 @@ class CreateNote extends React.Component {
                     <input
                     className = 'input-textarea-line'
                     id='line'
-                    placeholder = "input the lines you are memorizing"
+                    placeholder = "input the lines you want to remember"
                     value = {this.state.line}
                     onChange = {(e) => this.setState({line: e.target.value})}
                     />
                 </div>
                 <div className='note-input-monologue'>
                     <input 
+                    // cols="50" rows="5" style="border:groove 6px black"
                     className = 'input-textarea-monologue'
                     id='monologue'
-                    placeholder='type in the lines you are responding to'
+                    placeholder= 'input lines you are responding to'
                     value = {this.state.monologue}
                     onChange = {(e) => this.setState({monologue: e.target.value})}
                     />
@@ -63,6 +66,8 @@ class CreateNote extends React.Component {
         );
     }
 }
+
+
 
 
 

@@ -11,8 +11,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      lines: [],
+      monologue: [],
       user: userService.getUser()
-    }
+    };
   }
 
   handleLogout = () => {
@@ -20,11 +22,19 @@ class App extends Component {
     this.setState({ user: null });
   }
 
-
-
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
   }
+  
+  getNewLine() {
+    return {
+      card: {
+        line: ''
+      }
+    }
+  }
+    
+  
 
 //   /*--- Lifecycle Methods ---*/
 
