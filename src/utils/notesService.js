@@ -1,6 +1,6 @@
 import tokenService from './tokenService';
 
-const BASE_URL = '/api/NoteContainer/';
+const BASE_URL = 'http://localhost:3001/api/NoteContainer/';
 
 export default {
   index,

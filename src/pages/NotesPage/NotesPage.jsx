@@ -12,7 +12,6 @@ class CreateNote extends React.Component {
             error: false
         }
     }
-
     async componentDidMount() {
         const notes = await notesService.index();
         this.props.handleUpdateNotes(notes);
@@ -31,14 +30,6 @@ class CreateNote extends React.Component {
     render() {
         return(
             <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>  
-            <div className='create-card'>
-                <div className='note-card__shadow'
-                onClick={() => {
-                    this.props.onShadowClick();
-                }}
-                >
-            
-            </div>
             <div className='note-body'>
                 <h1>Add Your Lines</h1>
                 <div className='note-input-line'>
@@ -69,7 +60,7 @@ class CreateNote extends React.Component {
                         <div className='note-error'>
                         </div>
                     </div>
-                </div>  
+             
             </form> 
         );
     }
