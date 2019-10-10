@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
+import notesService from '../../utils/notesService';
 import MemoryPage from '../../pages/MemoryPage/MemoryPage';
 
 
@@ -11,8 +12,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      lines: [],
-      monologue: [],
+    notes: [],
       user: userService.getUser()
     };
   }
@@ -25,15 +25,22 @@ class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
   }
-  
-  getNewLine() {
+
+  getNewCard() {
     return {
-      card: {
-        line: ''
+      note: {
+        front: '',
+        back: '',
+        
       }
     }
   }
-    
+  
+  async componentDidMount() {
+    const notes = await notesService.index();
+    this.setState({ notes })
+  }
+
   
 
 //   /*--- Lifecycle Methods ---*/

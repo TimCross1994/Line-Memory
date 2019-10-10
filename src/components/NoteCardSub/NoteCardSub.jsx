@@ -1,6 +1,5 @@
 import React from 'react';
 import './NoteCardSub.css';
-import NoteCardFront from '../NoteCardFront/NoteCardFront';
 class CreateNote extends React.Component {
     constructor(props) {
         super(props);
@@ -10,19 +9,16 @@ class CreateNote extends React.Component {
             error: false
         }
     }
+    formRef = React.createRef() 
 
     hiddenError() {
         this.setState({error: !this.state.hiddenError})
     }
-    
-    render() {
-        const messageError = this.state.error ? 'Please add lines to memorize!'
-        :'';
-        return(
-            <div className='create-card'>
-                <NoteCardFront line={this.state.currentCard.line}
 
-                />
+    render() {
+        return(
+            <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>  
+            <div className='create-card'>
                 <div className='note-card__shadow'
                 onClick={() => {
                     this.props.onShadowClick();
@@ -52,17 +48,17 @@ class CreateNote extends React.Component {
                     />
                 </div>
                 <div className='note-input-button'>
-                    <button
+                    <button type='submit'
                     id='add-button'
                    >
                             Add Line!
                         </button>
                     </div>
                         <div className='note-error'>
-                            {messageError}
                         </div>
                     </div>
-                </div>   
+                </div>  
+            </form> 
         );
     }
 }

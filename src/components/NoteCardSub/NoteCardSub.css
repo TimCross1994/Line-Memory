@@ -1,76 +1,69 @@
 html, body {
-    background: linear-gradient(to bottom right, #B3D8FC, white); 
-    font-family: roboto;
-    font-weight: 500;
+  background: linear-gradient(to bottom right, #B3D8FC, white); 
+  font-family: roboto;
+  font-weight: 500;
 }
 
 .create-card {
-    bottom: 0;
-    top: 0;
-    display: flex;
-    
-  }
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
 
-  .create-card {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%;
-  }
+.note-body{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* justify-content: center; */
+  height: 20em;
+  width: 30em;
+  background: #ffffff;
+  box-shadow: inset 0px 0px 27px 0px gray;
+  outline: 4px solid lightgrey;
+}
 
-  .note-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 20em;
-    
-    width: 30em;
-    background: #ffffff;
-    box-shadow: inset 0px 0px 27px 0px gray;
-    outline: 4px solid lightgrey;
-  }
+.note-input-line{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  box-sizing: border-box;
+  resize: none;
+}
 
-  .note-input-line{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;
-    box-sizing: border-box;
-    resize: none;
-  }
+.input-textarea-line {
+  width: 100%;
+  height: 75px;
+  padding: 10px 10px 90px ;
+  /* margin: 10px; */
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
 
-  .input-textarea-line {
-    width: 100%;
-    height: 75px;
-    padding: 10px 10px 90px ;
-    /* margin: 10px; */
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-  }
+.note-input-monologue {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  box-sizing: border-box;
+  resize: none;
+}
+.input-textarea-monologue{
+  width: 100%;
+  height: 75px;
+  padding: 10px 10px 90px ;
+  /* margin: 10px; */
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
 
-  .note-input-monologue {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;
-    box-sizing: border-box;
-    resize: none;
-  }
-  .input-textarea-monologue{
-    width: 100%;
-    height: 75px;
-    padding: 10px 10px 90px ;
-    /* margin: 10px; */
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-  }
-
-  .note-input-button {
-      top: 60%;
-      height: 100px;
-      padding: 10px 5px 23px;
-  }
+.note-input-button {
+    top: 60%;
+    height: 100px;
+    padding: 10px 5px 23px;
+}
