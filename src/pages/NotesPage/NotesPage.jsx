@@ -1,5 +1,8 @@
 import React from 'react';
-import './NoteCardSub.css';
+// import { Link } from 'react-router-dom';
+import notesService from '../../utils/notesService';
+import './NotesPage.css';
+
 class CreateNote extends React.Component {
     constructor(props) {
         super(props);
@@ -8,6 +11,16 @@ class CreateNote extends React.Component {
             monologue: '',
             error: false
         }
+    }
+
+    async componentDidMount() {
+        const notes = await notesService.index();
+        this.props.handleUpdateNotes(notes);
+    }
+
+    handleChange = (e) => {
+        this.props.updateMessage('')
+
     }
     formRef = React.createRef() 
 
@@ -39,7 +52,6 @@ class CreateNote extends React.Component {
                 </div>
                 <div className='note-input-monologue'>
                     <input 
-                    // cols="50" rows="5" style="border:groove 6px black"
                     className = 'input-textarea-monologue'
                     id='monologue'
                     placeholder= 'input lines you are responding to'

@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch} from 'react-router-dom';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
 import notesService from '../../utils/notesService';
 import MemoryPage from '../../pages/MemoryPage/MemoryPage';
-
+import NotesPage from '../../pages/NotesPage/NotesPage';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+    ...this.getInitialState(),
     notes: [],
       user: userService.getUser()
     };
   }
+
+  getInitialState() {
+
+  }
+
+  
+
+
 
   handleLogout = () => {
     userService.logout();
@@ -58,6 +67,11 @@ render() {
       handleLogout = {this.handleLogout}
       />
       }/>
+      <Route exact path='/note-cards' render={() =>
+      <NotesPage/>
+
+     }/>  
+    
       <Route exact path='/signup' render={({ history }) => 
         <SignupPage
          history={history}
@@ -70,6 +84,7 @@ render() {
         handleSignupOrLogin={this.handleSignupOrLogin}
         />
       }/>
+      {/* <Route exact path='/notes' render */}
     </Switch>
   </div>
     );

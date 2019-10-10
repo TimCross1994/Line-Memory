@@ -1,3 +1,9 @@
+html, body {
+  background: linear-gradient(to bottom right, #B3D8FC, white); 
+  font-family: roboto;
+  font-weight: 500;
+}
+
 .MemoryPage-link-margin {
     margin-bottom: 10px;
   }

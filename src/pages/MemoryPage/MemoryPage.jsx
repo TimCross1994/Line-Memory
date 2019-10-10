@@ -1,7 +1,6 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
-import NoteCardSub from '../../components/NoteCardSub/NoteCardSub';
-
 import './MemoryPage.css';
 
 
@@ -13,18 +12,18 @@ const MemoryPage = (props) => {
     handleLogout = {props.handleLogout}
     />
       <header className='header-footer'>L I N E  ||  M E M O R Y</header>
-      <NoteCardSub 
-      user = {props.user}
-      />
-      
       <div className="flex-h align-flex-end">
         </div>
+      {/* <div>
+        <Link to= '/' className='btn btn-default btn-sm>Back To HomePage</Link>
+      </div> */}
       <footer className='header-footer'>
       </footer>
-      </div>
+    </div>
   
   );
 
 };
+
 
 export default MemoryPage;
