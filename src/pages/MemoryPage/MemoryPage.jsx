@@ -2,6 +2,7 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import './MemoryPage.css';
+import myNotes from '../myNotes/myNotes';
 
 
 const MemoryPage = (props) => {
@@ -16,6 +17,9 @@ const MemoryPage = (props) => {
         </div>
       <footer className='header-footer'>
       </footer>
+    <myNotes
+    handleCreateNote={props.handleCreateNote}
+    />
     </div>
   
   );

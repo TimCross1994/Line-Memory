@@ -113,6 +113,7 @@ render() {
       />
 
      }/>  
+
     
       <Route exact path='/signup' render={({ history }) => 
         <SignupPage
@@ -126,7 +127,7 @@ render() {
         handleSignupOrLogin={this.handleSignupOrLogin}
         />
       }/>
-      <Route exact path='/myNotes' render={({history}) =>
+      <Route exact path='/myNotes' render={({props}) =>
       <myNotes
       notes={this.state.notes}
       handleCreateNote={this.state.handleCreateNote}
