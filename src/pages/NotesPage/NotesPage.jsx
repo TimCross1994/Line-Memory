@@ -2,23 +2,31 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import './NotesPage.css';
 
+
+
+
 class CreateNote extends React.Component {
-        state = {
+    state = {
         invalidNote: true,
-            noteData: {
+        noteData: {
             line: '',
             monologue: '',
+            user: userService.getUser()
         }
     }
     formRef = React.createRef() 
-
+    renderError() {
+        return this.state.error ? (
+            <div>{this.state.error}</div>
+            ) : null;
+        }
     handleSubmit =  e => {
         e.preventDefault();
         console.log('hello')
         this.props.handleCreateNote(this.state.noteData);
         console.log('hello again')
     }
-
+    
     handleChange = (e) => {
         const noteData = {...this.state.noteData, [e.target.name]: e.target.value};
         this.setState({
@@ -26,7 +34,6 @@ class CreateNote extends React.Component {
             invalidData: !this.formRef.current.checkValidity()
         })
     }
-
     render() {
         return(
             <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>  
@@ -34,9 +41,12 @@ class CreateNote extends React.Component {
                 <h1>Add Your Lines</h1>
                 <div className='note-input-line'>
                     <input
+                    value={this.state.user ? this.state.user : "you shall not pass"}
+                    name="user"
                     name="line"
+                    rows="10"
+                    
                     className = 'input-textarea-line'
-                    id='line'
                     placeholder = "input the lines you want to remember"
                     value = {this.state.line}
                     // onChange = {(e) => this.setState({line: e.target.value})}
