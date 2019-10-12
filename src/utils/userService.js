@@ -4,6 +4,7 @@ const BASE_URL = '/api/users/';
 
 function signup(user) {
   return fetch(BASE_URL + 'signup', {
+    // mode: 'cors',
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(user)
@@ -30,6 +31,7 @@ function logout() {
 
 function login(creds) {
   return fetch(BASE_URL + 'login', {
+    // mode: 'cors',
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(creds)

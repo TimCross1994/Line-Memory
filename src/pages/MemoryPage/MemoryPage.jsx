@@ -14,9 +14,6 @@ const MemoryPage = (props) => {
       <header className='header-footer'>L I N E  ||  M E M O R Y</header>
       <div className="flex-h align-flex-end">
         </div>
-      {/* <div>
-        <Link to= '/' className='btn btn-default btn-sm>Back To HomePage</Link>
-      </div> */}
       <footer className='header-footer'>
       </footer>
     </div>

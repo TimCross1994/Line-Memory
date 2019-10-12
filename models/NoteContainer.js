@@ -1,9 +1,17 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema;
 
-const NoteSchema = new Schema({
+var NoteSchema = new Schema({
     front: String,
-    back: String
-})
+    back: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
+
+},{
+    timestamps: true
+}
+);
 
 module.exports = mongoose.model('Note', NoteSchema);

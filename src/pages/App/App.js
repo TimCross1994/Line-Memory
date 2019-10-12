@@ -7,55 +7,95 @@ import userService from '../../utils/userService';
 import notesService from '../../utils/notesService';
 import MemoryPage from '../../pages/MemoryPage/MemoryPage';
 import NotesPage from '../../pages/NotesPage/NotesPage';
+import myNotes from '../myNotes/myNotes';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-    ...this.getInitialState(),
-    notes: [],
+      notes: [],
       user: userService.getUser()
     };
   }
-
-  getInitialState() {
-
-  }
-
-  
-
-
-
-  handleLogout = () => {
-    userService.logout();
-    this.setState({ user: null });
-  }
-
-  handleSignupOrLogin = () => {
-    this.setState({user: userService.getUser()});
-  }
-
-  getNewCard() {
-    return {
-      note: {
-        front: '',
-        back: '',
-        
-      }
-    }
-  }
   
   async componentDidMount() {
-    const notes = await notesService.index();
-    this.setState({ notes })
+   const notes = await notesApi.getAll()
+   this.setState({
+     notes: notes,
+   })
+
+
+    handleLogout = () => {
+      userService.logout();
+      this.setState({ user: null });
+    }
+    
+    handleSignupOrLogin = () => {
+      this.setState({user: userService.getUser()});
+    }
+    
+    handleCreateNote = async newNoteData => {
+      console.log('hi top')
+      const newNote = await notesService.create(newNoteData);
+      console.log('hi bot')
+      this.setState(state => ({
+        notes: [...state.notes, newNote]
+    }), () => this.props.history.push('/'));
+    console.log('hellloooooo')
   }
 
-  
+  notesUpdate = async updateNotes => {
+    const updateNotes = await notesApi.update(updateNotes)
+    const newNotesArray = this.state.notes.map(c =>
+      c._id === updateNotes._id ? updateNotes : c 
+      );
+      this.setState(
+        { notes: newNotesArray },
+        () => this.props.history.push('/note-cards')
+      );
+  }
+    notesDelete = async id => {
+      await notesAPI.deleteOne(id);
+      this.setState(state => ({
+        // Yay, filter returns a NEW array
+        notes: state.notes.filter(c => c._id !== id)
+      }), () => this.props.history.push('/note-cards'));
+    }
+// //   /*--- Lifecycle Methods ---*/
+  }
 
-//   /*--- Lifecycle Methods ---*/
-
-//   async componentDidMount() {
-//   }
+async onSubmit(submit) {
+  submit.preventDefault();
+  if (!this.isFormValid()) {
+    this.setState({ error: "All fields are required." });
+    return;
+  }
+  this.setState({ error: "", loading: true });
+  let { notes } = this.props;
+  fetch("/Note", {
+    method: "POST",
+    body: JSON.stringify(notes)
+  })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        this.setState({ loading: false, error: res.error });
+      } else {
+        this.props.addComment(notes);
+        this.setState({
+          notes: { ...notes, message: "" }
+        })
+      }
+    })
+    .catch(err => {
+      this.setState({
+        error: "Something went wrong while trying to submit your notes",
+      });
+    });
+}
+isFormValid() {
+  return this.props.notes.name !== "" && this.props.notes.message !== "";
+}
 
 render() {
     return(
@@ -68,7 +108,9 @@ render() {
       />
       }/>
       <Route exact path='/note-cards' render={() =>
-      <NotesPage/>
+      <NotesPage
+      handleCreateNote={this.handleCreateNote}
+      />
 
      }/>  
     
@@ -84,7 +126,15 @@ render() {
         handleSignupOrLogin={this.handleSignupOrLogin}
         />
       }/>
-      {/* <Route exact path='/notes' render */}
+      <Route exact path='/myNotes' render={({history}) =>
+      <myNotes
+      notes={this.state.notes}
+      handleCreateNote={this.state.handleCreateNote}
+      user={this.state.user}
+      notesDelete={this.notesDelete}
+      />
+    }/>
+      
     </Switch>
   </div>
     );

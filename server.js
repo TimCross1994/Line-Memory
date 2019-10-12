@@ -2,23 +2,44 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const cors = require('cors');
+
+require('dotenv').config();
+require('./config/database')
 
 const app = express();
+
+const corsOptions = {
+  origin: 3000,
+  credentials: true,
+  optionsSuccessStatus: 200
+}
 
 require('dotenv').config();
 require('./config/database');
 
+const userRoute = require('./routes/api/user')
+const noteRoute = require('./routes/api/NoteContainer');
+
+
+//middleware
 app.use(logger('dev'));
 app.use(express.json());
-
+app.use(cors(corsOptions));
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
-// Put API routes here, before the "catch all" route
-app.use('/api/users', require('./routes/api/user'));
-app.use('/api/NoteContainer', require('./routes/api/NoteContainer'));
+
 
 app.use(require('./config/auth'));
+
+app.get('/hello', (req,res) => {
+  res.send('hello')
+})
+
+// Put API routes here, before the "catch all" route
+app.use('/api/users', userRoute);
+app.use('/api/NoteContainer', noteRoute);
 
 
 // The following "catch all" route (note the *)is necessary
