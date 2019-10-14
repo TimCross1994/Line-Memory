@@ -8,6 +8,7 @@ import notesService from '../../utils/notesService';
 import MemoryPage from '../../pages/MemoryPage/MemoryPage';
 import NotesPage from '../../pages/NotesPage/NotesPage';
 import myNotes from '../myNotes/myNotes';
+import * as notesApi from './services/notes-api';
 
 class App extends Component {
   constructor() {
@@ -35,18 +36,18 @@ class App extends Component {
     }
     
     handleCreateNote = async newNoteData => {
-      console.log('hi top')
+      
       const newNote = await notesService.create(newNoteData);
-      console.log('hi bot')
+      
       this.setState(state => ({
         notes: [...state.notes, newNote]
     }), () => this.props.history.push('/'));
-    console.log('hellloooooo')
+    
   }
 
   notesUpdate = async updateNotes => {
-    const updateNotes = await notesApi.update(updateNotes)
-    const newNotesArray = this.state.notes.map(c =>
+    var updateNotes = await notesApi.update (updateNotes)
+    var newNotesArray = this.state.notes.map(c =>
       c._id === updateNotes._id ? updateNotes : c 
       );
       this.setState(
@@ -55,7 +56,7 @@ class App extends Component {
       );
   }
     notesDelete = async id => {
-      await notesAPI.deleteOne(id);
+      await notesApi.deleteOne(id);
       this.setState(state => ({
         // Yay, filter returns a NEW array
         notes: state.notes.filter(c => c._id !== id)
@@ -106,15 +107,13 @@ render() {
       user = {this.state.user}
       handleLogout = {this.handleLogout}
       />
-      }/>
+    }/>
       <Route exact path='/note-cards' render={() =>
       <NotesPage
       handleCreateNote={this.handleCreateNote}
       />
-
-     }/>  
-
-    
+      
+    }/>  
       <Route exact path='/signup' render={({ history }) => 
         <SignupPage
          history={history}

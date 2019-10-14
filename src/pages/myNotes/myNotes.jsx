@@ -1,5 +1,7 @@
 import React from 'react';
 import './myNotes.css';
+import Notes from '../Notes'
+// import NotesCard from '../..components/NotesCard/NotesCard';
 
 function myNotes(props) {
     console.log('comment is being created')
@@ -7,13 +9,14 @@ function myNotes(props) {
     <div className = 'listpage'>
        <h1> Notes </h1>
            {props.notes.map(notes =>
-            <NotesPage
+            <Notes
             key={notes._id}
             notes={notes}
             notesDelete={props.notesDelete}
             />
            )
         }
+        
     </div>
 )
            
