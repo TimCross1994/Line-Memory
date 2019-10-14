@@ -8,6 +8,7 @@ import notesService from '../../utils/notesService';
 import MemoryPage from '../../pages/MemoryPage/MemoryPage';
 import NotesPage from '../../pages/NotesPage/NotesPage';
 import * as notesApi from '../services/notes-api';
+// import EditNotes from '../../pages/EditNotes/EditNotes'
 
 class App extends Component {
   constructor() {
@@ -24,36 +25,29 @@ class App extends Component {
      notes: notes,
    })
   }
-
+  
+  handleCreateNote = async newNoteData => {
+    const newNote = await notesService.create(newNoteData);
+    this.setState(state => ({
+      notes: [...state.notes, newNote]
+    }), () => this.props.history.push('/'));
+    
+  }
+notesUpdate = async updatedNotesData => {
+  var updateNotes = await notesApi.update (updatedNotesData)
+  var newNotesArray = this.state.notes.map(c =>
+    c._id === updateNotes._id ? updateNotes : c 
+    );
+    this.setState(
+      { notes: newNotesArray },
+      () => this.props.history.push('/note-cards')
+      );
+    }
     handleLogout = () => {
       userService.logout();
       this.setState({ user: null });
     }
     
-    handleSignupOrLogin = () => {
-      this.setState({user: userService.getUser()});
-    }
-    
-    handleCreateNote = async newNoteData => {
-      
-      const newNote = await notesService.create(newNoteData);
-      
-      this.setState(state => ({
-        notes: [...state.notes, newNote]
-    }), () => this.props.history.push('/'));
-    
-  }
-
-  notesUpdate = async updateNotes => {
-    var updateNotes = await notesApi.update (updateNotes)
-    var newNotesArray = this.state.notes.map(c =>
-      c._id === updateNotes._id ? updateNotes : c 
-      );
-      this.setState(
-        { notes: newNotesArray },
-        () => this.props.history.push('/note-cards')
-      );
-  }
     notesDelete = async id => {
       await notesApi.deleteOne(id);
       this.setState(state => ({
@@ -61,6 +55,12 @@ class App extends Component {
         notes: state.notes.filter(c => c._id !== id)
       }), () => this.props.history.push('/note-cards'));
     }
+    handleSignupOrLogin = () => {
+      this.setState({user: userService.getUser()});
+    }
+    
+
+  
     // //   /*--- Lifecycle Methods ---*/
     
     async onSubmit(submit) {
@@ -112,6 +112,14 @@ render() {
       />
       
     }/>  
+    <Route exact path='/myNotes' render={({history}) =>
+    <myNotes
+    notes={this.state.notes}
+    handleCreateNote={this.state.handleCreateNote}
+    user={this.state.user}
+    notesDelete={this.notesDelete}
+    />
+  }/>
       <Route exact path='/signup' render={({ history }) => 
         <SignupPage
          history={history}
@@ -124,14 +132,12 @@ render() {
         handleSignupOrLogin={this.handleSignupOrLogin}
         />
       }/>
-      {/* <Route exact path='/myNotes' render={({props}) =>
-      <myNotes
-      notes={this.state.notes}
-      handleCreateNote={this.state.handleCreateNote}
-      user={this.state.user}
-      notesDelete={this.notesDelete}
+      {/* <Route eact path='/edit' render={({history, location}) =>
+      <EditNotes
+      notesUpdate={this.notesUpdate}
       />
     }/> */}
+      
       
     </Switch>
   </div>
