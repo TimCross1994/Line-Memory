@@ -8,10 +8,8 @@ module.exports = {
     getUser
 }
 async function getUser (req,res) {
-    console.log("hitting")
     try{
       let allUsers = await User.find({});
-      console.log(allUsers)
       res.json({
         allUsers
       })

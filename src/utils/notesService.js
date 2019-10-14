@@ -11,7 +11,6 @@ export default {
 
 
 function index() {
-  console.log('hello')
   const options = {
     // mode: 'cors',
     method: 'GET',
@@ -19,14 +18,12 @@ function index() {
       'Authorization': 'Bearer ' + tokenService.getToken()
     }
   };
-  console.log(BASE_URL, options)
+  // console.log(BASE_URL, options)
 
   return fetch(BASE_URL, options).then(res => res.json());
 }
 
 function create(note) {
-  console.log('create')
-  console.log('noteee', note)
   return fetch(BASE_URL, {
     mode: 'cors',
     method: 'POST',

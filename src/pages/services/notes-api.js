@@ -6,7 +6,6 @@ export function getAll() {
   }
   
   export function create(comments) {
-    console.log("see me!", comments)
     return fetch(BASE_URL, {
       method: 'POST',
       headers: {'content-type': 'application/json'},

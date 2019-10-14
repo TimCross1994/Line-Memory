@@ -1,7 +1,6 @@
 import React from 'react';
 const Notes = (props) => {
    const { user, front, back} = props.notes;
-   console.log("notes for you actors", user.name)
    return (
        <div>
            { user.name ?

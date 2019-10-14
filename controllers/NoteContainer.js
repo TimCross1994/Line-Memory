@@ -21,7 +21,6 @@ async function deleteOne(req, res) {
 }
 
 async function create(req, res) {
-    console.log('user: ', req.user)
     const notes = await Note.create(req.body)
     res.status(200).json(notes)
 }

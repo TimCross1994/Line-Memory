@@ -23,9 +23,7 @@ class CreateNote extends React.Component {
         }
     handleSubmit =  e => {
         e.preventDefault();
-        console.log('hello')
         this.props.handleCreateNote(this.state.noteData);
-        console.log('hello again')
     }
     
     handleChange = (e) => {

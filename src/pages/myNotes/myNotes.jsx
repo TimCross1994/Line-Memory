@@ -4,7 +4,6 @@ import Notes from '../Notes'
 // import NotesCard from '../..components/NotesCard/NotesCard';
 
 function myNotes(props) {
-    console.log('comment is being created')
     return (
     <div className = 'listpage'>
        <h1> Notes </h1>
