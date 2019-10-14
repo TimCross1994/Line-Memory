@@ -7,8 +7,7 @@ import userService from '../../utils/userService';
 import notesService from '../../utils/notesService';
 import MemoryPage from '../../pages/MemoryPage/MemoryPage';
 import NotesPage from '../../pages/NotesPage/NotesPage';
-import myNotes from '../myNotes/myNotes';
-import * as notesApi from './services/notes-api';
+import * as notesApi from '../services/notes-api';
 
 class App extends Component {
   constructor() {
@@ -24,7 +23,7 @@ class App extends Component {
    this.setState({
      notes: notes,
    })
-
+  }
 
     handleLogout = () => {
       userService.logout();
@@ -62,10 +61,9 @@ class App extends Component {
         notes: state.notes.filter(c => c._id !== id)
       }), () => this.props.history.push('/note-cards'));
     }
-// //   /*--- Lifecycle Methods ---*/
-  }
-
-async onSubmit(submit) {
+    // //   /*--- Lifecycle Methods ---*/
+    
+    async onSubmit(submit) {
   submit.preventDefault();
   if (!this.isFormValid()) {
     this.setState({ error: "All fields are required." });
@@ -99,7 +97,7 @@ isFormValid() {
 }
 
 render() {
-    return(
+  return(
     <div className ="App">
     <Switch>
       <Route exact path='/' render={()=>       
@@ -117,7 +115,7 @@ render() {
       <Route exact path='/signup' render={({ history }) => 
         <SignupPage
          history={history}
-        handleSignupOrLogin={this.handleSignupOrLogin}
+         handleSignupOrLogin={this.handleSignupOrLogin}
         />
       }/>
       <Route exact path='/login' render={({history}) => 
@@ -126,19 +124,21 @@ render() {
         handleSignupOrLogin={this.handleSignupOrLogin}
         />
       }/>
-      <Route exact path='/myNotes' render={({props}) =>
+      {/* <Route exact path='/myNotes' render={({props}) =>
       <myNotes
       notes={this.state.notes}
       handleCreateNote={this.state.handleCreateNote}
       user={this.state.user}
       notesDelete={this.notesDelete}
       />
-    }/>
+    }/> */}
       
     </Switch>
   </div>
     );
-  };
+};
 }
+
+
 //note
 export default App;

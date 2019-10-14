@@ -1,6 +1,6 @@
 import React from 'react';
 import './myNotes.css';
-import Notes from '../Notes'
+import Notes from '../Notes/Notes'
 // import NotesCard from '../..components/NotesCard/NotesCard';
 
 function myNotes(props) {

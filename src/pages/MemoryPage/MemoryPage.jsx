@@ -17,6 +17,7 @@ const MemoryPage = (props) => {
         </div>
       <footer className='header-footer'>
       </footer>
+    <div className="col-8  pt-3 bg-white"></div>
     <myNotes
     handleCreateNote={props.handleCreateNote}
     />
